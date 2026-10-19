@@ -1,39 +1,73 @@
-import { NavLink, Route, Routes } from 'react-router'
+import { useEffect, type ReactElement } from 'react'
+import { Route, Routes, useLocation } from 'react-router'
+import { Characters, Pharmacy, Species } from './pages/CardPages'
+import Lobby from './pages/Lobby'
+import Lore from './pages/Lore'
+import NotFound from './pages/NotFound'
+import Profile from './pages/Profile'
+import {
+  NOT_FOUND_TITLE,
+  PAGE_IDS,
+  PAGES,
+  documentTitle,
+  pageTitle,
+  type PageId,
+} from './routes'
 
-function Home() {
-  return <h1 className="text-3xl font-bold text-pink-600">pink_apl</h1>
+// Typed by PageId, so adding a page to routes.ts without a component here is
+// a compile error.
+const ELEMENTS: Record<PageId, ReactElement> = {
+  lobby: <Lobby />,
+  info: <Profile />,
+  lore: <Lore />,
+  characters: <Characters />,
+  species: <Species />,
+  pharmacy: <Pharmacy />,
 }
 
-function About() {
-  return <h1 className="text-3xl font-bold text-pink-600">About</h1>
+function Titled({
+  title,
+  children,
+}: {
+  title: string
+  children: ReactElement
+}) {
+  useEffect(() => {
+    document.title = title
+  }, [title])
+  return children
 }
 
-function NotFound() {
-  return <h1 className="text-3xl font-bold text-pink-600">Page not found</h1>
+function ScrollToTopOnNavigate() {
+  const { pathname, search } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname, search])
+  return null
 }
 
 function App() {
-  const linkClass = ({ isActive }: { isActive: boolean }) =>
-    isActive
-      ? 'font-semibold text-pink-600'
-      : 'text-gray-600 hover:text-pink-600'
-
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <nav className="mb-8 flex gap-4">
-        <NavLink to="/" end className={linkClass}>
-          Home
-        </NavLink>
-        <NavLink to="/about" className={linkClass}>
-          About
-        </NavLink>
-      </nav>
+    <>
+      <ScrollToTopOnNavigate />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
+        {PAGE_IDS.map((id) => (
+          <Route
+            key={id}
+            path={PAGES[id].path}
+            element={<Titled title={pageTitle(id)}>{ELEMENTS[id]}</Titled>}
+          />
+        ))}
+        <Route
+          path="*"
+          element={
+            <Titled title={documentTitle(NOT_FOUND_TITLE)}>
+              <NotFound />
+            </Titled>
+          }
+        />
       </Routes>
-    </div>
+    </>
   )
 }
 

@@ -1,0 +1,51 @@
+import type { ReactNode } from 'react'
+import { HomeApple, HomeIcon } from '../components/HomeLinks'
+import { Stage } from '../components/Stage'
+import { assets } from '../content/assets'
+import { profile } from '../content/profile'
+
+/** Shared by the profile and lore pages: they differ only in the box's text. */
+export function ProfileLayout({
+  children,
+  footer,
+}: {
+  children: ReactNode
+  footer: ReactNode
+}) {
+  return (
+    <Stage>
+      <img
+        src={assets.profileArt}
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25 stage:left-auto stage:w-[62%] stage:opacity-60"
+      />
+
+      <div className="relative flex flex-col gap-4 stage:h-full stage:p-10 stage:pb-12">
+        <h1 className="font-display text-5xl leading-none stage:text-8xl">
+          {profile.name}
+        </h1>
+
+        <div className="relative flex flex-col border-4 border-hotpink bg-white/70 stage:min-h-0 stage:w-[600px] stage:flex-1">
+          <HomeIcon
+            src={assets.syringe}
+            className="absolute -top-8 -right-3 h-14 w-18 stage:-top-12 stage:-right-12 stage:h-24 stage:w-32"
+          />
+
+          {/* On the stage the box has a fixed height, so long text scrolls inside it. */}
+          <div className="scroll-pink space-y-4 p-5 pr-10 text-sm stage:flex-1 stage:overflow-y-auto stage:p-8 stage:pr-28 stage:text-base">
+            {children}
+          </div>
+
+          <div className="p-5 pt-0 stage:px-8 stage:pb-6">{footer}</div>
+
+          <img
+            src={assets.chibi}
+            alt=""
+            className="mx-auto mb-4 w-32 stage:absolute stage:-right-24 stage:bottom-0 stage:mb-0 stage:w-48"
+          />
+        </div>
+      </div>
+      <HomeApple />
+    </Stage>
+  )
+}

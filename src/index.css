@@ -1,1 +1,79 @@
 @import 'tailwindcss';
+
+/* Costa Rica: OFL, see assets/fonts/CostaRica-OFL.txt.
+   Sant Joan Despi: Forma & Co, licence handled by the customer. */
+@font-face {
+  font-family: 'Costa Rica';
+  src: url('./assets/fonts/CostaRica.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sant Joan Despi';
+  src: url('./assets/fonts/SantJoanDespi-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@theme {
+  --color-blush: #ffd8f1;
+  --color-bubblegum: #ffb7e1;
+  --color-hotpink: #ed4990;
+
+  --font-display: 'Costa Rica', 'Arial Black', sans-serif;
+  --font-body: 'Sant Joan Despi', 'Trebuchet MS', sans-serif;
+
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-drift: drift 24s linear infinite;
+
+  /* Animates `translate`, not `transform`, so hover:scale / hover:rotate
+     still work on the same element. */
+  @keyframes float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -6px;
+    }
+  }
+
+  /* One tile of bg-crosses, so the loop is seamless. */
+  @keyframes drift {
+    to {
+      translate: 96px 96px;
+    }
+  }
+}
+
+/* Wide enough to show the scaled 16:10 card instead of the stacked phone
+   layout. Must match STAGE_QUERY in components/Stage.tsx. */
+@custom-variant stage (@media (min-width: 768px) and (min-height: 500px));
+
+@layer base {
+  html {
+    background-color: var(--color-bubblegum);
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-hotpink);
+    text-transform: uppercase;
+  }
+}
+
+/* Two offset grids of medical crosses, 96px apart (must match the drift
+   keyframes and the -inset in Stage.tsx). The colour is --color-hotpink,
+   written out because CSS variables don't reach inside an SVG data URL. */
+@utility bg-crosses {
+  --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' fill='%23ed4990'%3E%3Crect x='45' y='39' width='6' height='18' rx='1.5'/%3E%3Crect x='39' y='45' width='18' height='6' rx='1.5'/%3E%3C/svg%3E");
+  background-image: var(--cross), var(--cross);
+  background-size: 96px 96px;
+  background-position:
+    0 0,
+    48px 48px;
+}
+
+@utility scroll-pink {
+  scrollbar-color: var(--color-hotpink) transparent;
+  scrollbar-width: thin;
+}
