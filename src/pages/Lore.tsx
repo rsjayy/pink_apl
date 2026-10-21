@@ -1,14 +1,14 @@
+import { BBCode } from '../components/BBCode'
 import { TextLink } from '../components/TextLink'
-import { profile } from '../content/profile'
 import { PAGES } from '../routes'
 import { ProfileLayout } from './ProfileLayout'
+import { builtContent } from '../content/site'
 
 export default function Lore() {
+  const { profile } = builtContent
   return (
     <ProfileLayout footer={<TextLink to={PAGES.info.path}>&lt; Back</TextLink>}>
-      {profile.lore.map((paragraph, i) => (
-        <p key={i}>{paragraph}</p>
-      ))}
+      <BBCode text={profile.lore} />
     </ProfileLayout>
   )
 }

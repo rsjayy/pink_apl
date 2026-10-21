@@ -43,11 +43,34 @@ lobby (the ① marks in the sketches).
 
 ## Content and images
 
-- Text, links and card lists: `src/content/*.ts`.
-- Every image URL: `src/content/assets.ts` (and the card images in
-  `content/cards.ts`). All are placeholders for now (stock photos and placehold.co). To use real
-  art, put the files in `public/img/` and swap the URL for `img('file.png')`.
-  Never write image paths with a leading `/`: the site lives under `/pink_apl/`.
+All words, links and images are in three JSON files in `src/content/`
+(`lobby`, `profile`, `cards`), typed and loaded by `content/site.ts`. Each
+image sits in the file of the page that shows it.
+Pages read them through `builtContent`, never by importing the JSON directly.
+
+Every image is a full link (`https://...`); the site has no image files of its
+own. The editor won't save an image that isn't a link.
+
+## Editor (`/editor`)
+
+A password-protected page for changing the content without touching code,
+lazy-loaded so visitors never download it. It saves through the
+static-page-editors server (`https://09176645.xyz/github-pages-editor`, project
+`pink_apl`), which writes the JSON file, commits it to the `content` branch,
+merges into `main` and pushes, which redeploys the site. Each changed file is
+one save, so one commit.
+
+- The profile's About text and the Lore are BBCode, edited with SCEditor
+  (`editor/BBCodeEditor.tsx`, scripts loaded from unpkg) and shown with BBob
+  (`components/BBCode.tsx`). The toolbar only offers tags BBob renders.
+- Forms per section: `editor/sections.tsx`. Checks that block saving:
+  `editor/validate.ts`.
+- Right after a save the built-in content is stale until GitHub rebuilds, so
+  the editor keeps its own copy of each save until a newer build exists
+  (`editor/savedCopies.ts`).
+- `VITE_EDITOR_API_URL` and `VITE_EDITOR_PROJECT_ID` point it at another
+  server, e.g. a local one. Never point a test server at this working copy:
+  every save is a real commit and push.
 
 ## Fonts
 

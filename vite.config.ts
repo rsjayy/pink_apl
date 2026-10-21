@@ -2,7 +2,11 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
 import {
+  EDITOR_PATH,
+  EDITOR_TITLE,
   NOT_FOUND_TITLE,
+  SET_PASSWORD_PATH,
+  SET_PASSWORD_TITLE,
   PAGE_IDS,
   PAGES,
   documentTitle,
@@ -17,7 +21,8 @@ function escapeHtml(text: string) {
  * GitHub Pages only serves files that exist, so a refresh on /pink_apl/oc
  * would 404. This writes a copy of index.html for every page in routes.ts
  * (oc/index.html, info/lore/index.html, ...) with that page's title, plus a
- * 404.html that the app turns into its "page not found" screen.
+ * 404.html that the app turns into its "page not found" screen, and the
+ * editor's pages, hidden from search engines.
  */
 function pageHtml(): Plugin {
   return {
@@ -48,6 +53,19 @@ function pageHtml(): Plugin {
           })
         }
       }
+      for (const [path, title] of [
+        [EDITOR_PATH, EDITOR_TITLE],
+        [SET_PASSWORD_PATH, SET_PASSWORD_TITLE],
+      ]) {
+        this.emitFile({
+          type: 'asset',
+          fileName: `${path.slice(1)}/index.html`,
+          source: withTitle(documentTitle(title)).replace(
+            '</head>',
+            '<meta name="robots" content="noindex, nofollow" />\n  </head>',
+          ),
+        })
+      }
       this.emitFile({
         type: 'asset',
         fileName: '404.html',
@@ -62,4 +80,8 @@ export default defineConfig({
   // Served from https://<user>.github.io/pink_apl/
   base: '/pink_apl/',
   plugins: [react(), tailwindcss(), pageHtml()],
+  define: {
+    // The editor compares this with its own save times; see editor/savedCopies.ts.
+    __BUILD_TIME__: JSON.stringify(Date.now()),
+  },
 })

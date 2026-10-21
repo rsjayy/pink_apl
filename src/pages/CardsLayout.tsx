@@ -4,7 +4,7 @@ import { HomeApple } from '../components/HomeLinks'
 import { PageTitle } from '../components/PageTitle'
 import { Stage } from '../components/Stage'
 import { Pager } from '../components/TextLink'
-import type { Card } from '../content/cards'
+import type { Card } from '../content/site'
 import { usePagedItems } from '../hooks/usePagedItems'
 
 /** Shared by the OC, Species and Pharmacy pages: a title and three cards per page. */

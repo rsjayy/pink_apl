@@ -1,0 +1,71 @@
+{
+  "characters": [
+    {
+      "name": "Name 1",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%201",
+      "url": "https://toyhou.se"
+    },
+    {
+      "name": "Name 2",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%202",
+      "url": "https://toyhou.se"
+    },
+    {
+      "name": "Name 3",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%203",
+      "url": "https://toyhou.se"
+    },
+    {
+      "name": "Name 4",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%204",
+      "url": "https://toyhou.se"
+    },
+    {
+      "name": "Name 5",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%205",
+      "url": "https://toyhou.se"
+    },
+    {
+      "name": "Name 6",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%206",
+      "url": "https://toyhou.se"
+    }
+  ],
+  "species": [
+    {
+      "name": "Name 1",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%201",
+      "url": "https://www.pinterest.com/"
+    },
+    {
+      "name": "Name 2",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%202",
+      "url": "https://www.pinterest.com/"
+    },
+    {
+      "name": "Name 3",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%203",
+      "url": "https://www.pinterest.com/"
+    },
+    {
+      "name": "Name 4",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%204",
+      "url": "https://www.pinterest.com/"
+    }
+  ],
+  "pharmacySubtitle": "Special Thanks",
+  "thanks": [
+    {
+      "caption": "If u don't mind hehe (web dev)",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%201"
+    },
+    {
+      "caption": "Someone (idk)",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%202"
+    },
+    {
+      "caption": "Friend (yes)",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%203"
+    }
+  ]
+}

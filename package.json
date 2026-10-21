@@ -12,9 +12,12 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@bbob/preset-react": "^4.4.1",
+    "@bbob/react": "^4.4.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router": "^8.4.0"
+    "react-router": "^8.4.0",
+    "sceditor-react": "^0.1.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

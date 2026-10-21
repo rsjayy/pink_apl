@@ -1,4 +1,4 @@
-import type { Card } from '../content/cards'
+import type { Card } from '../content/site'
 
 function CardBody({ card }: { card: Card }) {
   return (

@@ -1,21 +1,14 @@
+import { BBCode } from '../components/BBCode'
 import { TextLink } from '../components/TextLink'
-import { profile } from '../content/profile'
 import { PAGES } from '../routes'
 import { ProfileLayout } from './ProfileLayout'
+import { builtContent } from '../content/site'
 
 export default function Profile() {
+  const { profile } = builtContent
   return (
     <ProfileLayout footer={<TextLink to={PAGES.lore.path}>Lore &gt;</TextLink>}>
-      {profile.facts.map((group, i) => (
-        <dl key={i}>
-          {group.map((fact) => (
-            <div key={fact.label}>
-              <dt className="inline">{fact.label}: </dt>
-              <dd className="inline">{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-      ))}
+      <BBCode text={profile.about} />
     </ProfileLayout>
   )
 }

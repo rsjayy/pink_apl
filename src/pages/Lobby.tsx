@@ -1,19 +1,21 @@
 import { Link } from 'react-router'
+import { BBCode } from '../components/BBCode'
 import { HomeApple } from '../components/HomeLinks'
 import { Stage } from '../components/Stage'
-import { assets } from '../content/assets'
-import { lobby, lobbyNav } from '../content/lobby'
+import { builtContent, MENU } from '../content/site'
+import { PAGES } from '../routes'
 
 export default function Lobby() {
+  const { lobby } = builtContent
   return (
     <Stage>
       {/* Phones: banner, welcome box, nav stacked. Stage: nav down the left. */}
-      <div className="flex flex-col gap-6 stage:grid stage:h-full stage:grid-cols-[17rem_1fr] stage:grid-rows-[15rem_1fr] stage:gap-x-10 stage:p-10 stage:pr-24">
+      <div className="flex flex-col gap-6 stage:grid stage:h-full stage:grid-cols-[17rem_1fr] stage:grid-rows-[auto_1fr] stage:gap-x-10 stage:p-10 stage:pr-24">
         <div className="relative overflow-hidden rounded-2xl stage:col-start-2 stage:row-start-1">
           <img
-            src={assets.banner}
+            src={lobby.banner}
             alt=""
-            className="h-40 w-full object-cover object-[50%_20%] stage:h-full"
+            className="aspect-3/1 w-full object-cover"
           />
         </div>
 
@@ -22,24 +24,21 @@ export default function Lobby() {
             {lobby.heading}
           </h1>
           <div className="flex flex-1 flex-col justify-center gap-3 py-6 text-center stage:text-lg">
-            <p>{lobby.description}</p>
-            <p>
-              {lobby.socialsIntro} {lobby.socials.join(' ')}
-            </p>
+            <BBCode text={lobby.description} />
           </div>
           <p className="text-xs stage:text-sm">{lobby.disclaimer}</p>
         </section>
 
         <nav className="grid grid-cols-2 gap-4 stage:col-start-1 stage:row-span-2 stage:row-start-1 stage:flex stage:flex-col stage:justify-around">
-          {lobbyNav.map((item, i) => (
+          {MENU.map((item, i) => (
             <Link
-              key={item.to}
-              to={item.to}
+              key={i}
+              to={PAGES[item.page].path}
               className="relative flex h-16 items-center rounded-xl border-4 border-hotpink bg-white/70 pr-12 pl-4 font-display text-xl transition-colors hover:bg-white stage:h-20 stage:pr-20 stage:pl-8 stage:text-3xl"
             >
               {item.label}
               <img
-                src={item.icon}
+                src={lobby.menuIcons[item.page]}
                 alt=""
                 // Centred with my-auto, not translate: the float animation owns translate.
                 className="absolute inset-y-0 right-1 my-auto size-12 rounded-lg object-cover shadow-md motion-safe:animate-float stage:-right-6 stage:size-20"

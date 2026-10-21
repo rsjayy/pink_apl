@@ -1,2 +1,6 @@
 dist
 package-lock.json
+
+# Written by the editor backend (JSON.stringify, 2 spaces). Formatting them
+# here would only make noise in the next save's diff.
+src/content/*.json

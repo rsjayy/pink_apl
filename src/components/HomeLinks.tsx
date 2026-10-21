@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
-import { assets } from '../content/assets'
 import { PAGES } from '../routes'
+import { builtContent } from '../content/site'
 
 const WIGGLE =
   'transition-transform hover:-rotate-6 hover:scale-110 focus-visible:scale-110'
@@ -34,10 +34,11 @@ export function HomeIcon({
  * sits in the card's corner.
  */
 export function HomeApple() {
+  const { lobby } = builtContent
   return (
     <HomeIcon
-      src={assets.apple}
-      className="fixed right-4 bottom-4 z-10 size-16 motion-safe:animate-float stage:absolute stage:right-6 stage:bottom-6 stage:size-20"
+      src={lobby.apple}
+      className="fixed right-4 bottom-4 z-10 size-16 stage:absolute stage:right-6 stage:bottom-6 stage:size-20"
     />
   )
 }

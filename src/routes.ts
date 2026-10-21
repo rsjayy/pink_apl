@@ -19,6 +19,14 @@ export const PAGE_IDS = Object.keys(PAGES) as PageId[]
 
 export const NOT_FOUND_TITLE = 'Page not found'
 
+/** The owner-only content editor. Not in PAGES: it isn't part of the site. */
+export const EDITOR_PATH = '/editor'
+export const EDITOR_TITLE = 'Editor'
+
+/** Where the owner sets the editor password and their GitHub token. */
+export const SET_PASSWORD_PATH = '/set-password'
+export const SET_PASSWORD_TITLE = 'Set password'
+
 export function documentTitle(title: string) {
   return `${title} | ${SITE_NAME}`
 }
