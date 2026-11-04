@@ -1,70 +1,30 @@
 {
   "characters": [
     {
-      "name": "Name 1",
+      "name": "OC name here",
       "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%201",
-      "url": "https://toyhou.se"
-    },
-    {
-      "name": "Name 2",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%202",
-      "url": "https://toyhou.se"
-    },
-    {
-      "name": "Name 3",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%203",
-      "url": "https://toyhou.se"
-    },
-    {
-      "name": "Name 4",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%204",
-      "url": "https://toyhou.se"
-    },
-    {
-      "name": "Name 5",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%205",
-      "url": "https://toyhou.se"
-    },
-    {
-      "name": "Name 6",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=OC%206",
       "url": "https://toyhou.se"
     }
   ],
   "species": [
     {
-      "name": "Name 1",
+      "name": "Human-shaped-but-not-quite-human",
       "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%201",
-      "url": "https://www.pinterest.com/"
-    },
-    {
-      "name": "Name 2",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%202",
-      "url": "https://www.pinterest.com/"
-    },
-    {
-      "name": "Name 3",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%203",
-      "url": "https://www.pinterest.com/"
-    },
-    {
-      "name": "Name 4",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Species%204",
       "url": "https://www.pinterest.com/"
     }
   ],
   "pharmacySubtitle": "Special Thanks",
   "thanks": [
     {
-      "caption": "If u don't mind hehe (web dev)",
+      "caption": "Fantastic Earth human",
       "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%201"
     },
     {
-      "caption": "Someone (idk)",
+      "caption": "Someone",
       "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%202"
     },
     {
-      "caption": "Friend (yes)",
+      "caption": "Fren",
       "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%203"
     }
   ]

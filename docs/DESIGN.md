@@ -56,7 +56,7 @@ own. The editor won't save an image that isn't a link.
 A password-protected page for changing the content without touching code,
 lazy-loaded so visitors never download it. It saves through the
 static-page-editors server (`https://09176645.xyz/github-pages-editor`, project
-`pink_apl`), which writes the JSON file, commits it to the `content` branch,
+`hazukrist-pink_apl`), which writes the JSON file, commits it to the `content` branch,
 merges into `main` and pushes, which redeploys the site. Each changed file is
 one save, so one commit.
 

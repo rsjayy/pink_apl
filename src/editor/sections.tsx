@@ -1,4 +1,3 @@
-import { placeholder } from '../content/assets'
 import {
   MENU,
   type Card,
@@ -187,8 +186,8 @@ function cardList(list: 'characters' | 'species' | 'thanks') {
           }
           itemName="card"
           newItem={() => ({
-            name: 'New',
-            image: placeholder(400, 400, 'New'),
+            name: '',
+            image: '',
           })}
           summary={(card) => <CardSummary card={card} />}
           renderItem={(card, update) => (

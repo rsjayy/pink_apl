@@ -10,7 +10,7 @@
 export const EDITOR_API_URL =
   import.meta.env.VITE_EDITOR_API_URL ??
   'https://09176645.xyz/github-pages-editor'
-export const PROJECT_ID = import.meta.env.VITE_EDITOR_PROJECT_ID ?? 'pink_apl'
+export const PROJECT_ID = import.meta.env.VITE_EDITOR_PROJECT_ID ?? 'hazukrist-pink_apl'
 
 const storageKey = `editor_password_${PROJECT_ID}`
 
