@@ -29,16 +29,29 @@
   "pharmacySubtitle": "Special Thanks",
   "thanks": [
     {
-      "caption": "Fantastic Earth human",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%201"
+      "caption": "Peak dev who helped with the coding",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Dev%20",
+      "name": "PinkTruck"
     },
     {
-      "caption": "Someone",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%202"
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Emoguy%20",
+      "name": "Gant",
+      "caption": "May I have some oats brother"
     },
     {
-      "caption": "Fren",
-      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=Thanks%203"
+      "caption": "Support system",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=wip%20",
+      "name": "Begadang Kaki 5"
+    },
+    {
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=WIP%201",
+      "name": "Entropistsea",
+      "caption": "Mentor"
+    },
+    {
+      "name": "Kavin",
+      "image": "https://placehold.co/400x400/FFB7E1/ED4990?text=WIP%202",
+      "caption": "Bat."
     }
   ]
 }
