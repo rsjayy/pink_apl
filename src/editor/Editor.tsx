@@ -5,7 +5,6 @@ import {
   type ContentFile,
   type SiteContent,
 } from '../content/site'
-import { documentTitle, EDITOR_TITLE } from '../routes'
 import { useEditorAuth } from './auth'
 import { Button } from './fields'
 import { PasswordGate } from './PasswordGate'
@@ -233,10 +232,6 @@ function StatusLine({
 }
 
 export default function Editor() {
-  useEffect(() => {
-    document.title = documentTitle(EDITOR_TITLE)
-  }, [])
-
   return (
     <PasswordGate>
       <Workspace />
