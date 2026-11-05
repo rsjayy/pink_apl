@@ -41,7 +41,7 @@ export default function Lobby() {
                 src={lobby.menuIcons[item.page]}
                 alt=""
                 // Centred with my-auto, not translate: the float animation owns translate.
-                className="absolute inset-y-0 right-1 my-auto size-12 rounded-lg object-cover shadow-md motion-safe:animate-float stage:-right-6 stage:size-20"
+                className="absolute inset-y-0 right-1 my-auto size-12 rounded-lg object-cover drop-shadow-md motion-safe:animate-float stage:-right-6 stage:size-20"
                 // Start each icon at a different point so they don't bob in unison.
                 style={{ animationDelay: `${-i * 1.25}s` }}
               />

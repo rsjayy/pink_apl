@@ -22,7 +22,7 @@ export function HomeIcon({
       <img
         src={src}
         alt=""
-        className="h-full w-full rounded-lg object-cover shadow-md"
+        className="h-full w-full rounded-lg object-cover drop-shadow-md"
       />
     </Link>
   )
