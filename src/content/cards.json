@@ -8,9 +8,22 @@
   ],
   "species": [
     {
-      "image": "https://f2.toyhou.se/file/f2-toyhou-se/characters/41860284?1790390463",
-      "url": "https://toyhou.se/41860284.candygora",
-      "name": "CandyGora"
+      "name": "DreamHorn🦄",
+      "image": "https://f2.toyhou.se/file/f2-toyhou-se/images/130677938_AzH3pclsBtGs970.png",
+      "url": "https://toyhou.se/41860539.dreamhorn",
+      "caption": "A species of humanoid unicorns capable of sleepwalking at will, wandering seamlessly into the dreams of others."
+    },
+    {
+      "name": "P-Col ♦️",
+      "image": "https://f2.toyhou.se/file/f2-toyhou-se/images/130678002_eiUw6cjvXKK2JN9.png",
+      "caption": "Humans with a diamond shape on their body who can understand any language ever spoken by humankind.",
+      "url": "https://toyhou.se/37856765.p-col"
+    },
+    {
+      "name": "CandyGora 🧟‍♀️🍭",
+      "image": "https://f2.toyhou.se/file/f2-toyhou-se/images/130677974_RDEVAS18M17Neg7.png",
+      "caption": "A type of zombie created by inserting wandering souls into artificial sweets made almost entirely of candy.",
+      "url": "https://toyhou.se/41860284.candygora"
     }
   ],
   "pharmacySubtitle": "Special Thanks",
