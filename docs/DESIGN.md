@@ -21,9 +21,9 @@ and giving it a component in `App.tsx` (TypeScript complains until you do).
 
 GitHub Pages only serves files that exist. The `page-html` plugin in
 `vite.config.ts` reads `routes.ts` and writes a copy of `index.html` for every
-page (`oc/index.html`, `info/lore/index.html`, ...), each with its own
-`<title>`. Deep links and refreshes load with a normal 200. A `404.html` copy
-shows the app's "page not found" screen for anything else.
+page (`oc/index.html`, `info/lore/index.html`, ...). Every page has the same
+`<title>`, set in `index.html`. Deep links and refreshes load with a normal 200.
+A `404.html` copy shows the app's "page not found" screen for anything else.
 
 Paging uses `?page=N` rather than new paths, so it needs no extra files.
 
