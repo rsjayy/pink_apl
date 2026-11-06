@@ -13,7 +13,13 @@ export function PageTitle({
       <h1 className="font-display text-4xl leading-none stage:text-6xl">
         {children}
       </h1>
-      {icon && <HomeIcon src={icon} className="size-12 stage:size-16" />}
+      {icon && (
+        <HomeIcon
+          src={icon}
+          className="size-12 stage:size-16"
+          imageClassName="motion-safe:animate-float"
+        />
+      )}
     </div>
   )
 }

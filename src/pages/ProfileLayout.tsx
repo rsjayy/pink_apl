@@ -26,11 +26,12 @@ export function ProfileLayout({
           {profile.name}
         </h1>
 
-        {/* On phones the height limit keeps the frame above her face; short screens get enough room to read instead. */}
-        <div className="relative flex max-h-[max(44dvh-5.5rem,15rem)] min-h-0 flex-col border-4 border-hotpink bg-white/70 stage:max-h-none stage:w-[600px] stage:flex-1">
+        {/* On phones the height limit leaves room below for the chibi; short screens get enough room to read instead. */}
+        <div className="relative flex max-h-[max(70dvh-5.5rem,15rem)] min-h-0 flex-col border-4 border-hotpink bg-white/70 stage:max-h-none stage:w-[600px] stage:flex-1">
           <HomeIcon
             src={lobby.menuIcons.info}
             className="absolute -top-8 -right-3 size-16 stage:-top-14 stage:-right-12 stage:size-28"
+            imageClassName="motion-safe:animate-float"
           />
 
           <div className="min-h-0 flex-1 scroll-pink space-y-4 overflow-y-auto p-5 pr-14 text-sm stage:p-8 stage:pr-28 stage:text-base">
