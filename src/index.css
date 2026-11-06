@@ -24,6 +24,7 @@
 
   --animate-float: float 5s ease-in-out infinite;
   --animate-drift: drift 24s linear infinite;
+  --animate-slow-spin: slow-spin 60s linear infinite;
 
   /* Animates `translate`, not `transform`, so hover:scale / hover:rotate
      still work on the same element. */
@@ -41,6 +42,12 @@
   @keyframes drift {
     to {
       translate: 96px 96px;
+    }
+  }
+
+  @keyframes slow-spin {
+    to {
+      rotate: 360deg;
     }
   }
 }
