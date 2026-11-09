@@ -6,11 +6,20 @@ function CardBody({ card }: { card: Card }) {
       {card.name && (
         <span className="text-2xl stage:text-3xl">{card.name}</span>
       )}
-      <img
-        src={card.image}
-        alt={card.name ?? card.caption ?? ''}
-        className="aspect-square w-full border-4 border-hotpink bg-white object-cover transition-transform group-hover:-translate-y-1"
-      />
+      <div className="relative w-full transition-transform group-hover:-translate-y-1">
+        <img
+          src={card.image}
+          alt={card.name ?? card.caption ?? ''}
+          className="aspect-square w-full border-4 border-hotpink bg-white object-cover"
+        />
+        {card.sticker && (
+          <img
+            src={card.sticker}
+            alt=""
+            className="absolute -bottom-[4%] -left-[4%] aspect-square w-2/5 object-contain stage:-bottom-[8%] stage:-left-[8%]"
+          />
+        )}
+      </div>
       {card.caption && (
         <span className="text-center text-base stage:text-xl">
           {card.caption}

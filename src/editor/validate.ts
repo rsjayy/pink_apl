@@ -36,6 +36,8 @@ export function findProblems(content: SiteContent): Problem[] {
     content.cards[list].forEach((card: Card, i) => {
       if (!isLink(card.image))
         add('cards', `${title}: card ${i + 1} needs an image link.`)
+      if (card.sticker !== undefined && !isLink(card.sticker))
+        add('cards', `${title}: card ${i + 1}'s sticker must be an image link.`)
       if (card.url !== undefined && !isLink(card.url)) {
         add('cards', `${title}: card ${i + 1}'s link must start with https://.`)
       }

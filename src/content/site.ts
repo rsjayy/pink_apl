@@ -13,6 +13,8 @@ export interface Card {
   /** Shown under the image. */
   caption?: string
   image: string
+  /** Small picture over the frame's bottom-left corner. */
+  sticker?: string
   /** Opens in a new tab. No url means the card is not a link. */
   url?: string
 }

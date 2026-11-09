@@ -114,7 +114,7 @@ function CardFields({
   update: (card: Card) => void
 }) {
   // Empty optional fields are dropped, so the page doesn't show an empty line.
-  const set = (field: 'name' | 'caption' | 'url', v: string) => {
+  const set = (field: 'name' | 'caption' | 'url' | 'sticker', v: string) => {
     const next = { ...card, [field]: v }
     if (!v) delete next[field]
     update(next)
@@ -127,6 +127,11 @@ function CardFields({
         hint="Square image"
         value={card.image}
         onChange={(image) => update({ ...card, image })}
+      />
+      <ImageInput
+        label="Corner sticker image link"
+        value={card.sticker ?? ''}
+        onChange={(v) => set('sticker', v)}
       />
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Name">
