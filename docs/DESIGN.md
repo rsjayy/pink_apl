@@ -51,6 +51,17 @@ Pages read them through `builtContent`, never by importing the JSON directly.
 Every image is a full link (`https://...`); the site has no image files of its
 own. The editor won't save an image that isn't a link.
 
+## Lobby cat
+
+`components/LobbyCat.tsx`. A cat peeks over the bottom-left of the banner.
+Clicking it makes it fall to the bottom of the screen and walk back and forth,
+and clicking it again drops a random item. Set the GIFs and items under `cat` in
+`lobby.json` or in the editor's Lobby section.
+
+The cat stays hidden until all three GIF links are set. They should share one
+square frame with the feet at the bottom edge and the cat facing right; the code
+mirrors it to walk left.
+
 ## Editor (`/editor`)
 
 A password-protected page for changing the content without touching code,

@@ -65,6 +65,45 @@ function LobbyForm({ value, onChange }: SectionProps<'lobby'>) {
           />
         ))}
       </Group>
+      <Group title="Cat GIF links">
+        <ImageInput
+          label="Peeking"
+          value={value.cat.peek}
+          onChange={(peek) => set('cat', { ...value.cat, peek })}
+        />
+        <ImageInput
+          label="Falling"
+          value={value.cat.fall}
+          onChange={(fall) => set('cat', { ...value.cat, fall })}
+        />
+        <ImageInput
+          label="Walking (feet at the bottom, facing right)"
+          value={value.cat.walk}
+          onChange={(walk) => set('cat', { ...value.cat, walk })}
+        />
+      </Group>
+      <Group title="Cat loots">
+        <ListEditor
+          items={value.cat.items}
+          onChange={(items) => set('cat', { ...value.cat, items })}
+          itemName="item"
+          newItem={() => ''}
+          summary={(item) => (
+            <span className="block size-10 overflow-hidden rounded-md border-2 border-bubblegum bg-blush">
+              {item.trim() && (
+                <img
+                  src={item.trim()}
+                  alt=""
+                  className="size-full object-contain"
+                />
+              )}
+            </span>
+          )}
+          renderItem={(item, update) => (
+            <ImageInput label="Image link" value={item} onChange={update} />
+          )}
+        />
+      </Group>
     </>
   )
 }

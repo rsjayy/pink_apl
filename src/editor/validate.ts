@@ -32,6 +32,19 @@ export function findProblems(content: SiteContent): Problem[] {
       add('lobby', `The ${label} menu button needs an icon link.`)
   }
 
+  const { cat } = content.lobby
+  for (const [name, link] of [
+    ['peeking', cat.peek],
+    ['falling', cat.fall],
+    ['walking', cat.walk],
+  ]) {
+    if (link && !isLink(link))
+      add('lobby', `The ${name} cat GIF must be an image link or left blank.`)
+  }
+  cat.items.forEach((item, i) => {
+    if (!isLink(item)) add('lobby', `Cat item ${i + 1} needs an image link.`)
+  })
+
   for (const [list, title] of CARD_LISTS) {
     content.cards[list].forEach((card: Card, i) => {
       if (!isLink(card.image))

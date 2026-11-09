@@ -25,6 +25,10 @@
   --animate-float: float 5s ease-in-out infinite;
   --animate-drift: drift 24s linear infinite;
   --animate-slow-spin: slow-spin 60s linear infinite;
+  --animate-item-arc: item-arc 0.9s both;
+  --animate-item-fade: item-fade 0.6s ease-in 6s forwards;
+  --animate-item-drift:
+    item-drift 0.65s linear forwards, item-fade 0.6s ease-in 6s forwards;
 
   /* Animates `translate`, not `transform`, so hover:scale / hover:rotate
      still work on the same element. */
@@ -48,6 +52,49 @@
   @keyframes slow-spin {
     to {
       rotate: 360deg;
+    }
+  }
+
+  /* Sideways travel and height are separate so the item flies in a curve.
+     Must end as the arc first touches the floor (70% of item-arc's 0.9s). */
+  @keyframes item-drift {
+    to {
+      translate: var(--item-drift) 0;
+    }
+  }
+
+  @keyframes item-arc {
+    0% {
+      translate: 0 calc(var(--item-drop-height) * -1);
+      rotate: 0deg;
+      scale: 0.4;
+      animation-timing-function: ease-out;
+    }
+    30% {
+      translate: 0 calc(var(--item-drop-height) * -1 - 70px);
+      scale: 1;
+      animation-timing-function: ease-in;
+    }
+    70% {
+      translate: 0 0;
+      rotate: var(--item-spin);
+      animation-timing-function: ease-out;
+    }
+    85% {
+      translate: 0 -14px;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      translate: 0 0;
+      rotate: var(--item-spin);
+      scale: 1;
+    }
+  }
+
+  /* LobbyCat.tsx removes the item when this one ends, so keep the name in sync. */
+  @keyframes item-fade {
+    to {
+      opacity: 0;
     }
   }
 }

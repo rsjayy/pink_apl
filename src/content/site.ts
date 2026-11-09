@@ -41,6 +41,13 @@ export interface LobbyContent {
   banner: string
   /** The corner button back to the lobby, on every page. */
   apple: string
+  /** The cat's GIFs (no cat until all three are set) and what it can drop. */
+  cat: {
+    peek: string
+    fall: string
+    walk: string
+    items: string[]
+  }
   /** Each menu button's icon, also shown on that page (by its title, or on the Bio box). */
   menuIcons: Record<MenuPage, string>
 }
