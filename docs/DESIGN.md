@@ -62,6 +62,10 @@ The cat stays hidden until all three GIF links are set. They should share one
 square frame with the feet at the bottom edge and the cat facing right; the code
 mirrors it to walk left.
 
+The cat only appears once all three GIFs have finished downloading, so clicking
+it can never outrun the fall or walk GIF. Large GIFs delay it, so keep them small:
+it is shown at most 144px wide.
+
 ## Editor (`/editor`)
 
 A password-protected page for changing the content without touching code,

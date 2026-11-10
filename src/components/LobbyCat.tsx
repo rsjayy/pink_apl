@@ -1,8 +1,9 @@
 // The lobby's little desktop-pet cat.
-// PeekingCat sits in the banner. Clicking it swaps it for RoamingCat, which
-// falls to the bottom of the screen, walks back and forth and drops a random
-// item when clicked. Images come from `cat` in content/lobby.json; the Lobby
-// page leaves the cat out until all three GIF links are set.
+// PeekingCat waits for every GIF to download, then rises slowly out of the
+// banner. Clicking it swaps it for RoamingCat, which falls to the bottom of the
+// screen, walks back and forth and drops a random item when clicked. Images come
+// from `cat` in content/lobby.json; the Lobby page leaves the cat out until all
+// three GIF links are set.
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { builtContent } from '../content/site'
@@ -14,8 +15,8 @@ const { cat } = builtContent.lobby
 const CAT_SIZE = 'size-24 stage:size-36'
 
 // Speeds are in page pixels: the stage is always 1280 wide before scaling.
-const GRAVITY = 1800
-const HOP_SPEED = -420
+const GRAVITY = 600
+const HOP_SPEED = -200
 const WALK_SPEED = 75
 const TURN_CHANCE_PER_SECOND = 0.12
 const LONGEST_FRAME_SECONDS = 0.05
@@ -25,23 +26,37 @@ const APPLE_CLEARANCE = 110
 
 const ITEM_SIZE = 48
 const MOST_ITEMS_ON_SCREEN = 12
+
+// Kept for the life of the page so the browser can swap GIFs from memory.
+const loadedImages: HTMLImageElement[] = []
+let catImagesLoading: Promise<unknown> | undefined
 // #endregion
 
 // #region Components
 export function PeekingCat({ onPoke }: { onPoke: (start: DOMRect) => void }) {
-  // Without this the new sprites flash blank the first time the cat falls.
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // The cat can't be clicked until now, so the fall and walk GIFs are always ready.
   useEffect(() => {
-    for (const src of [cat.fall, cat.walk, ...cat.items]) {
-      new Image().src = src
+    let isMounted = true
+    loadCatImages()
+      .then(() => {
+        if (isMounted) setIsLoaded(true)
+      })
+      .catch(console.warn)
+    return () => {
+      isMounted = false
     }
   }, [])
+
+  if (!isLoaded) return null
 
   return (
     <button
       type="button"
       aria-label="Poke the cat"
       onClick={(event) => onPoke(event.currentTarget.getBoundingClientRect())}
-      className={`absolute bottom-0 left-4 origin-bottom cursor-pointer transition-transform hover:scale-105 focus-visible:scale-105 ${CAT_SIZE}`}
+      className={`absolute bottom-0 left-4 origin-bottom cursor-pointer transition-transform hover:scale-105 focus-visible:scale-105 motion-safe:animate-cat-rise ${CAT_SIZE}`}
     >
       <img
         src={cat.peek}
@@ -195,5 +210,26 @@ export function RoamingCat({ start }: { start: DOMRect }) {
       ))}
     </div>
   )
+}
+// #endregion
+
+// #region Image loading
+function loadCatImages() {
+  if (catImagesLoading) return catImagesLoading
+
+  // Items don't hold the cat back: a slow or broken one only affects that item.
+  for (const item of cat.items) loadImage(item).catch(console.warn)
+  catImagesLoading = Promise.all([cat.peek, cat.fall, cat.walk].map(loadImage))
+  return catImagesLoading
+}
+
+function loadImage(src: string) {
+  return new Promise<void>((resolve, reject) => {
+    const image = new Image()
+    loadedImages.push(image)
+    image.onload = () => resolve()
+    image.onerror = () => reject(new Error(`Cat image didn't load: ${src}`))
+    image.src = src
+  })
 }
 // #endregion
