@@ -13,6 +13,8 @@ export interface Card {
   /** Shown under the image. */
   caption?: string
   image: string
+  /** Small picture over the frame's bottom-left corner. */
+  sticker?: string
   /** Opens in a new tab. No url means the card is not a link. */
   url?: string
 }
@@ -39,6 +41,13 @@ export interface LobbyContent {
   banner: string
   /** The corner button back to the lobby, on every page. */
   apple: string
+  /** The cat's GIFs (no cat until all three are set) and what it can drop. */
+  cat: {
+    peek: string
+    fall: string
+    walk: string
+    items: string[]
+  }
   /** Each menu button's icon, also shown on that page (by its title, or on the Bio box). */
   menuIcons: Record<MenuPage, string>
 }

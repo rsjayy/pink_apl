@@ -5,14 +5,7 @@ import Lobby from './pages/Lobby'
 import Lore from './pages/Lore'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
-import {
-  NOT_FOUND_TITLE,
-  PAGE_IDS,
-  PAGES,
-  documentTitle,
-  pageTitle,
-  type PageId,
-} from './routes'
+import { PAGE_IDS, PAGES, type PageId } from './routes'
 
 // Typed by PageId, so adding a page to routes.ts without a component here is
 // a compile error.
@@ -23,19 +16,6 @@ const ELEMENTS: Record<PageId, ReactElement> = {
   characters: <Characters />,
   species: <Species />,
   pharmacy: <Pharmacy />,
-}
-
-function Titled({
-  title,
-  children,
-}: {
-  title: string
-  children: ReactElement
-}) {
-  useEffect(() => {
-    document.title = title
-  }, [title])
-  return children
 }
 
 function ScrollToTopOnNavigate() {
@@ -52,20 +32,9 @@ function App() {
       <ScrollToTopOnNavigate />
       <Routes>
         {PAGE_IDS.map((id) => (
-          <Route
-            key={id}
-            path={PAGES[id].path}
-            element={<Titled title={pageTitle(id)}>{ELEMENTS[id]}</Titled>}
-          />
+          <Route key={id} path={PAGES[id].path} element={ELEMENTS[id]} />
         ))}
-        <Route
-          path="*"
-          element={
-            <Titled title={documentTitle(NOT_FOUND_TITLE)}>
-              <NotFound />
-            </Titled>
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )

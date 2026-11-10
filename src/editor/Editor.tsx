@@ -5,10 +5,10 @@ import {
   type ContentFile,
   type SiteContent,
 } from '../content/site'
-import { documentTitle, EDITOR_TITLE } from '../routes'
 import { useEditorAuth } from './auth'
 import { Button } from './fields'
 import { PasswordGate } from './PasswordGate'
+import { PinterestTool } from './PinterestTool'
 import { loadLatest, rememberSave } from './savedCopies'
 import { sectionChanged, SECTIONS, type SectionProps } from './sections'
 import { findProblems } from './validate'
@@ -25,6 +25,10 @@ const FILE_NAMES: Record<ContentFile, string> = {
   cards: 'Cards',
 }
 
+// A helper tool, not a content section, so it lives outside SECTIONS.
+const PIN_TOOL_ID = 'pin'
+const PIN_TOOL_LABEL = 'Get Pinterest image link'
+
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b)
 
 function Workspace() {
@@ -38,10 +42,10 @@ function Workspace() {
 
   // Where you are is in the URL, so a reload keeps your place.
   const [params, setParams] = useSearchParams()
+  const showPinTool = params.get('section') === PIN_TOOL_ID
   const section =
     SECTIONS.find((s) => s.id === params.get('section')) ?? SECTIONS[0]
-  const open = (next: (typeof SECTIONS)[number]) =>
-    setParams({ section: next.id }, { replace: true })
+  const open = (id: string) => setParams({ section: id }, { replace: true })
 
   const dirty = CONTENT_FILES.filter((f) => !same(draft[f], saved[f]))
   const problems = useMemo(() => findProblems(draft), [draft])
@@ -140,10 +144,14 @@ function Workspace() {
             <button
               key={s.id}
               type="button"
-              aria-current={s.id === section.id ? 'page' : undefined}
-              onClick={() => open(s)}
+              aria-current={
+                !showPinTool && s.id === section.id ? 'page' : undefined
+              }
+              onClick={() => open(s.id)}
               className={`flex shrink-0 items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold transition-colors ${
-                s.id === section.id ? 'bg-hotpink text-white' : 'hover:bg-white'
+                !showPinTool && s.id === section.id
+                  ? 'bg-hotpink text-white'
+                  : 'hover:bg-white'
               }`}
             >
               {s.label}
@@ -155,21 +163,34 @@ function Workspace() {
               )}
             </button>
           ))}
+          <button
+            type="button"
+            aria-current={showPinTool ? 'page' : undefined}
+            onClick={() => open(PIN_TOOL_ID)}
+            className={`shrink-0 rounded-lg px-3 py-2 text-left text-sm font-semibold transition-colors lg:mt-4 ${
+              showPinTool ? 'bg-hotpink text-white' : 'hover:bg-white'
+            }`}
+          >
+            {PIN_TOOL_LABEL}
+          </button>
         </nav>
 
         <main className="min-h-0 flex-1 overflow-y-auto p-4 lg:p-8">
           <div className="mx-auto flex max-w-3xl flex-col gap-5">
             <h2 className="font-display text-3xl text-hotpink uppercase">
-              {section.label}
+              {showPinTool ? PIN_TOOL_LABEL : section.label}
             </h2>
-            {problems.length > 0 && (
+            {showPinTool && <PinterestTool />}
+            {!showPinTool && problems.length > 0 && (
               <ul className="rounded-xl border-2 border-red-300 bg-red-50 p-3 text-sm text-red-800">
                 {problems.map((p, i) => (
                   <li key={i}>{p.message}</li>
                 ))}
               </ul>
             )}
-            <Form value={draft[section.file]} onChange={setFile} />
+            {!showPinTool && (
+              <Form value={draft[section.file]} onChange={setFile} />
+            )}
           </div>
         </main>
       </div>
@@ -211,10 +232,6 @@ function StatusLine({
 }
 
 export default function Editor() {
-  useEffect(() => {
-    document.title = documentTitle(EDITOR_TITLE)
-  }, [])
-
   return (
     <PasswordGate>
       <Workspace />

@@ -14,10 +14,11 @@ export function ProfileLayout({
   const { profile, lobby } = builtContent
   return (
     <Stage>
+      {/* Fixed to the screen on phones, so scrolling can't zoom it; shifted right to keep her face in the narrow slice. */}
       <img
         src={profile.profileArt}
         alt=""
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25 stage:opacity-60"
+        className="pointer-events-none fixed inset-0 h-dvh w-full object-cover object-right opacity-25 stage:absolute stage:h-full stage:object-center stage:opacity-60"
       />
 
       <div className="relative flex flex-col gap-4 stage:h-full stage:p-10 stage:pb-12">
@@ -25,14 +26,15 @@ export function ProfileLayout({
           {profile.name}
         </h1>
 
-        <div className="relative flex flex-col border-4 border-hotpink bg-white/70 stage:min-h-0 stage:w-[600px] stage:flex-1">
+        {/* On phones the height limit leaves room below for the chibi; short screens get enough room to read instead. */}
+        <div className="relative flex max-h-[max(70dvh-5.5rem,15rem)] min-h-0 flex-col border-4 border-hotpink bg-white/70 stage:max-h-none stage:w-[600px] stage:flex-1">
           <HomeIcon
             src={lobby.menuIcons.info}
             className="absolute -top-8 -right-3 size-16 stage:-top-14 stage:-right-12 stage:size-28"
+            imageClassName="motion-safe:animate-float"
           />
 
-          {/* On the stage the box has a fixed height, so long text scrolls inside it. */}
-          <div className="scroll-pink space-y-4 p-5 pr-10 text-sm stage:flex-1 stage:overflow-y-auto stage:p-8 stage:pr-28 stage:text-base">
+          <div className="min-h-0 flex-1 scroll-pink space-y-4 overflow-y-auto p-5 pr-14 text-sm stage:p-8 stage:pr-28 stage:text-base">
             {children}
           </div>
 
@@ -41,7 +43,7 @@ export function ProfileLayout({
           <img
             src={profile.chibi}
             alt=""
-            className="mx-auto mb-4 w-32 stage:absolute stage:-right-24 stage:bottom-0 stage:mb-0 stage:w-48"
+            className="absolute top-full left-0 mt-1 w-24 stage:top-auto stage:-right-24 stage:bottom-0 stage:left-auto stage:mt-0 stage:w-48"
           />
         </div>
       </div>

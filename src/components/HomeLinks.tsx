@@ -9,20 +9,23 @@ const WIGGLE =
 export function HomeIcon({
   src,
   className = '',
+  imageClassName = '',
 }: {
   src: string
   className?: string
+  imageClassName?: string
 }) {
   return (
+    // The shadow sits on the link so it stays below the image when the image spins.
     <Link
       to={PAGES.lobby.path}
       aria-label="Back to the lobby"
-      className={`inline-block shrink-0 ${WIGGLE} ${className}`}
+      className={`inline-block shrink-0 drop-shadow-md ${WIGGLE} ${className}`}
     >
       <img
         src={src}
         alt=""
-        className="h-full w-full rounded-lg object-cover shadow-md"
+        className={`h-full w-full rounded-lg object-cover ${imageClassName}`}
       />
     </Link>
   )
@@ -39,6 +42,7 @@ export function HomeApple() {
     <HomeIcon
       src={lobby.apple}
       className="fixed right-4 bottom-4 z-10 size-16 stage:absolute stage:right-6 stage:bottom-6 stage:size-20"
+      imageClassName="motion-safe:animate-slow-spin"
     />
   )
 }

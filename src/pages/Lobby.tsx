@@ -1,12 +1,17 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { BBCode } from '../components/BBCode'
 import { HomeApple } from '../components/HomeLinks'
+import { PeekingCat, RoamingCat } from '../components/LobbyCat'
 import { Stage } from '../components/Stage'
 import { builtContent, MENU } from '../content/site'
 import { PAGES } from '../routes'
 
 export default function Lobby() {
   const { lobby } = builtContent
+  const [catStart, setCatStart] = useState<DOMRect | null>(null)
+  const hasCatImages = lobby.cat.peek && lobby.cat.fall && lobby.cat.walk
+
   return (
     <Stage>
       {/* Phones: banner, welcome box, nav stacked. Stage: nav down the left. */}
@@ -17,6 +22,7 @@ export default function Lobby() {
             alt=""
             className="aspect-3/1 w-full object-cover"
           />
+          {hasCatImages && !catStart && <PeekingCat onPoke={setCatStart} />}
         </div>
 
         <section className="flex flex-col border-4 border-hotpink bg-white/60 p-5 stage:col-start-2 stage:row-start-2 stage:mt-6 stage:min-h-0 stage:px-8">
@@ -41,7 +47,7 @@ export default function Lobby() {
                 src={lobby.menuIcons[item.page]}
                 alt=""
                 // Centred with my-auto, not translate: the float animation owns translate.
-                className="absolute inset-y-0 right-1 my-auto size-12 rounded-lg object-cover shadow-md motion-safe:animate-float stage:-right-6 stage:size-20"
+                className="absolute inset-y-0 right-1 my-auto size-12 rounded-lg object-cover drop-shadow-md motion-safe:animate-float stage:-right-6 stage:size-20"
                 // Start each icon at a different point so they don't bob in unison.
                 style={{ animationDelay: `${-i * 1.25}s` }}
               />
@@ -50,6 +56,7 @@ export default function Lobby() {
         </nav>
       </div>
       <HomeApple />
+      {catStart && <RoamingCat start={catStart} />}
     </Stage>
   )
 }

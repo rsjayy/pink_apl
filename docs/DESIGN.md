@@ -21,9 +21,9 @@ and giving it a component in `App.tsx` (TypeScript complains until you do).
 
 GitHub Pages only serves files that exist. The `page-html` plugin in
 `vite.config.ts` reads `routes.ts` and writes a copy of `index.html` for every
-page (`oc/index.html`, `info/lore/index.html`, ...), each with its own
-`<title>`. Deep links and refreshes load with a normal 200. A `404.html` copy
-shows the app's "page not found" screen for anything else.
+page (`oc/index.html`, `info/lore/index.html`, ...). Every page has the same
+`<title>`, set in `index.html`. Deep links and refreshes load with a normal 200.
+A `404.html` copy shows the app's "page not found" screen for anything else.
 
 Paging uses `?page=N` rather than new paths, so it needs no extra files.
 
@@ -50,6 +50,21 @@ Pages read them through `builtContent`, never by importing the JSON directly.
 
 Every image is a full link (`https://...`); the site has no image files of its
 own. The editor won't save an image that isn't a link.
+
+## Lobby cat
+
+`components/LobbyCat.tsx`. A cat peeks over the bottom-left of the banner.
+Clicking it makes it fall to the bottom of the screen and walk back and forth,
+and clicking it again drops a random item. Set the GIFs and items under `cat` in
+`lobby.json` or in the editor's Lobby section.
+
+The cat stays hidden until all three GIF links are set. They should share one
+square frame with the feet at the bottom edge and the cat facing right; the code
+mirrors it to walk left.
+
+The cat only appears once all three GIFs have finished downloading, so clicking
+it can never outrun the fall or walk GIF. Large GIFs delay it, so keep them small:
+it is shown at most 144px wide.
 
 ## Editor (`/editor`)
 
