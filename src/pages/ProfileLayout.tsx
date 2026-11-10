@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { HomeApple, HomeIcon } from '../components/HomeLinks'
 import { Stage } from '../components/Stage'
 import { builtContent } from '../content/site'
@@ -12,6 +12,20 @@ export function ProfileLayout({
   footer: ReactNode
 }) {
   const { profile, lobby } = builtContent
+  const textEndRef = useRef<HTMLDivElement>(null)
+  const [isAtTextEnd, setIsAtTextEnd] = useState(true)
+
+  useEffect(() => {
+    const textEnd = textEndRef.current
+    if (!textEnd) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsAtTextEnd(entry.isIntersecting),
+      { root: textEnd.parentElement },
+    )
+    observer.observe(textEnd)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <Stage>
       {/* Fixed to the screen on phones, so scrolling can't zoom it; shifted right to keep her face in the narrow slice. */}
@@ -26,16 +40,20 @@ export function ProfileLayout({
           {profile.name}
         </h1>
 
-        {/* On phones the height limit leaves room below for the chibi; short screens get enough room to read instead. */}
-        <div className="relative flex max-h-[max(70dvh-5.5rem,15rem)] min-h-0 flex-col border-4 border-hotpink bg-white/70 stage:max-h-none stage:w-[600px] stage:flex-1">
+        {/* On phones the height limit stops the frame just above the fixed row of chibi and apple. */}
+        <div className="relative flex max-h-[calc(100dvh-15rem)] min-h-0 flex-col border-4 border-hotpink bg-white/70 stage:max-h-none stage:w-[600px] stage:flex-1">
           <HomeIcon
             src={lobby.menuIcons.info}
             className="absolute -top-8 -right-3 size-16 stage:-top-14 stage:-right-12 stage:size-28"
             imageClassName="motion-safe:animate-float"
           />
 
-          <div className="min-h-0 flex-1 scroll-pink space-y-4 overflow-y-auto p-5 pr-14 text-sm stage:p-8 stage:pr-28 stage:text-base">
+          {/* Phones hide the scrollbar, so the fade is the only sign of more text. */}
+          <div
+            className={`min-h-0 flex-1 scroll-pink space-y-4 overflow-y-auto p-5 pr-14 text-sm stage:p-8 stage:pr-28 stage:text-base ${isAtTextEnd ? '' : 'mask-b-from-[calc(100%-3rem)] stage:mask-none'}`}
+          >
             {children}
+            <div ref={textEndRef} className="h-px" />
           </div>
 
           <div className="p-5 pt-0 stage:px-8 stage:pb-6">{footer}</div>
@@ -43,7 +61,7 @@ export function ProfileLayout({
           <img
             src={profile.chibi}
             alt=""
-            className="absolute top-full left-0 mt-1 w-24 stage:top-auto stage:-right-24 stage:bottom-0 stage:left-auto stage:mt-0 stage:w-48"
+            className="fixed bottom-4 left-4 w-28 stage:absolute stage:-right-24 stage:bottom-0 stage:left-auto stage:w-48"
           />
         </div>
       </div>
