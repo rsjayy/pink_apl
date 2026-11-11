@@ -173,7 +173,7 @@ export function RoamingCat({ start }: { start: DOMRect }) {
         type="button"
         aria-label="Pet the cat"
         onClick={dropItem}
-        className={`pointer-events-auto absolute top-0 left-0 cursor-pointer ${CAT_SIZE}`}
+        className={`pointer-events-auto absolute top-0 left-0 z-10 cursor-pointer ${CAT_SIZE}`}
       >
         <img
           src={isFalling ? cat.fall : cat.walk}
