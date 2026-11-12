@@ -55,7 +55,8 @@ own. The editor won't save an image that isn't a link.
 
 `components/LobbyCat.tsx`. A cat peeks over the bottom-left of the banner.
 Clicking it makes it fall to the bottom of the screen and walk back and forth,
-and clicking it again drops a random item. Set the GIFs and items under `cat` in
+and clicking it again drops a random item. Items fade away after a few seconds,
+or float off when clicked. Set the GIFs and items under `cat` in
 `lobby.json` or in the editor's Lobby section.
 
 The cat stays hidden until all three GIF links are set. They should share one
