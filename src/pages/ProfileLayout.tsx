@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { FallingPetals } from '../components/FallingPetals'
 import { HomeApple, HomeIcon } from '../components/HomeLinks'
 import { Stage } from '../components/Stage'
 import { builtContent } from '../content/site'
@@ -34,6 +35,7 @@ export function ProfileLayout({
         alt=""
         className="pointer-events-none fixed inset-0 h-dvh w-full object-cover object-right opacity-25 stage:absolute stage:h-full stage:object-center stage:opacity-60"
       />
+      <FallingPetals layer="back" />
 
       <div className="relative flex flex-col gap-4 stage:h-full stage:p-10 stage:pb-12">
         <h1 className="font-display text-5xl leading-none stage:text-8xl">
@@ -65,6 +67,7 @@ export function ProfileLayout({
           />
         </div>
       </div>
+      <FallingPetals layer="front" />
       <HomeApple />
     </Stage>
   )

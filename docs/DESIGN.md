@@ -67,6 +67,21 @@ The cat only appears once all three GIFs have finished downloading, so clicking
 it can never outrun the fall or walk GIF. Large GIFs delay it, so keep them small:
 it is shown at most 144px wide.
 
+## Falling petals
+
+`components/FallingPetals.tsx`. Sakura petals drift over the profile art on the
+Info and Lore pages. `ProfileLayout` puts one canvas behind the text box and one
+in front of everything, and neither can be clicked. Most petals fall behind the
+box, small, slow and a little out of focus the further away they are. Now and
+then a big, blurry one drifts past in front, and about once a minute a soft gust
+of wind pushes them sideways. All the numbers are in `LAYERS` at the top of the
+file: more petals means a lower `areaPerPetal`, and calmer petals mean a lower
+`fallSpeed` or `sway`.
+
+The number of petals follows the screen area, so phones get fewer. With "reduce
+motion" switched on, the petals are drawn once and stay still. Credits are in the
+README.
+
 ## Editor (`/editor`)
 
 A password-protected page for changing the content without touching code,
